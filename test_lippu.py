@@ -9,7 +9,7 @@ def test_aikuisen_hinta():
     # Arrange: valmistellaan syöte
     ika = 30
     # Act: kutsutaan testattavaa funktiota
-    hinta = lippuhinta(ika)
+    hinta = lippuhinta(ika, opiskelija=False)
     # Assert: tarkistetaan tulos
     assert hinta == 15.0
 
@@ -19,27 +19,28 @@ def test_aikuisen_hinta():
 # Poista sen jälkeen rivi @pytest.mark.skip.
 # @pytest.mark.skip(reason="Täydennä raja-arvot ja poista tämä rivi")
 @pytest.mark.parametrize(
-    "ika, odotettu",
+    "ika, odotettu, opiskelija",
     [
-        (0, 0.0),
-        (6, 0.0),
-        (7, 8.0),
-        (17, 8.0),
-        (18, 15.0),
-        (64, 15.0),
-        (65, 10.0),
-        (120, 10.0),
+        (0, 0.0, False),
+        (6, 0.0, False),
+        (7, 8.0, False),
+        (17, 8.0, False),
+        (18, 15.0, False),
+        (20, 10.0, True),
+        (64, 15.0, False),
+        (65, 10.0, False),
+        (120, 10.0, False),
     ],
 )
-def test_lippuhinta_raja_arvot(ika, odotettu):
-    assert lippuhinta(ika) == odotettu
+def test_lippuhinta_raja_arvot(ika, odotettu, opiskelija):
+    assert lippuhinta(ika, opiskelija) == odotettu
 
 
 # TEHTÄVÄ 3: Virheelliset iät nostavat ValueErrorin.
 @pytest.mark.parametrize("ika", [-1, 121])
 def test_virheellinen_ika(ika):
     with pytest.raises(ValueError):
-        lippuhinta(ika)
+        lippuhinta(ika, opiskelija=False)
 
 
 
