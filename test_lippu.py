@@ -9,7 +9,7 @@ def test_aikuisen_hinta():
     # Arrange: valmistellaan syöte
     ika = 30
     # Act: kutsutaan testattavaa funktiota
-    hinta = lippuhinta(ika)
+    hinta = lippuhinta(ika, opiskelija=False)
     # Assert: tarkistetaan tulos
     assert hinta == 15.0
 
@@ -32,14 +32,14 @@ def test_aikuisen_hinta():
     ],
 )
 def test_lippuhinta_raja_arvot(ika, odotettu):
-    assert lippuhinta(ika) == odotettu
+    assert lippuhinta(ika, opiskelija=False) == odotettu
 
 
 # TEHTÄVÄ 3: Virheelliset iät nostavat ValueErrorin.
 @pytest.mark.parametrize("ika", [-1, 121])
 def test_virheellinen_ika(ika):
     with pytest.raises(ValueError):
-        lippuhinta(ika)
+        lippuhinta(ika, opiskelija=False)
 
 
 
