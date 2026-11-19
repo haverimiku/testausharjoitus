@@ -19,20 +19,21 @@ def test_aikuisen_hinta():
 # Poista sen jälkeen rivi @pytest.mark.skip.
 # @pytest.mark.skip(reason="Täydennä raja-arvot ja poista tämä rivi")
 @pytest.mark.parametrize(
-    "ika, odotettu",
+    "ika, odotettu, opiskelija",
     [
-        (0, 0.0),
-        (6, 0.0),
-        (7, 8.0),
-        (17, 8.0),
-        (18, 15.0),
-        (64, 15.0),
-        (65, 10.0),
-        (120, 10.0),
+        (0, 0.0, False),
+        (6, 0.0, False),
+        (7, 8.0, False),
+        (17, 8.0, False),
+        (18, 15.0, False),
+        (20, 10.0, True),
+        (64, 15.0, False),
+        (65, 10.0, False),
+        (120, 10.0, False),
     ],
 )
-def test_lippuhinta_raja_arvot(ika, odotettu):
-    assert lippuhinta(ika, opiskelija=False) == odotettu
+def test_lippuhinta_raja_arvot(ika, odotettu, opiskelija):
+    assert lippuhinta(ika, opiskelija) == odotettu
 
 
 # TEHTÄVÄ 3: Virheelliset iät nostavat ValueErrorin.
@@ -56,7 +57,3 @@ def test_kokonaishinta_ryhmaalennus():
     # 10 lippua, alennus 10 %
     iat = [30] * 10
     assert kokonaishinta(iat) == 150.0 * 0.9
-
-def test_opiskelija_alennus():
-    iat = [20]
-    assert kokonaishinta(iat, opiskelija=True) == 10.0
