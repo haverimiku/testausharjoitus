@@ -56,3 +56,6 @@ def test_kokonaishinta_ryhmaalennus():
     # 10 lippua, alennus 10 %
     iat = [30] * 10
     assert kokonaishinta(iat) == 150.0 * 0.9
+
+def test_opiskelija_alennus():
+    assert lippuhinta(20, opiskelija=True) == 10.0
