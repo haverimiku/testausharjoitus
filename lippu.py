@@ -32,7 +32,7 @@ def lippuhinta(ika, opiskelija=False):
     return ELAKELAINEN_HINTA
 
 
-def kokonaishinta(iat, opiskelija):
+def kokonaishinta(iat):
     """Palauttaa lippujen yhteishinnan euroina, ryhmäalennus huomioituna."""
     summa = sum(lippuhinta(ika) for ika in iat)
     if len(iat) >= RYHMAN_KOKO:
